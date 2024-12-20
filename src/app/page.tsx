@@ -1,5 +1,6 @@
 const API_KEY = process.env.API_KEY;
 import React from 'react';
+import Results  from '../components/Results';
 
 export default async function Home({ searchParams }) {
   const genre = searchParams.genre || 'fetch';
@@ -14,18 +15,12 @@ export default async function Home({ searchParams }) {
   }
 
   const data = await res.json();
-
-  console.log(data.results)
+  const results = data.results
 
 
   return (
     <div>
-      <h1>Home Page</h1>
-      {data.results?.map((item) => (
-        <div key={item.id}>
-          <h2>{item.original_title }</h2>
-        </div>
-      ))}
+      <Results results = {results} />
     </div>
   );
 }
