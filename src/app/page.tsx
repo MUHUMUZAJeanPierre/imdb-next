@@ -7,7 +7,8 @@ export default async function Home({ searchParams }) {
 
   const endpoint = genre === 'fetchTopRated' ? `/movie/top_rated` : `/trending/all/week`;
 
-  const res = await fetch(`https://api.themoviedb.org/3${endpoint}n?api_key=${API_KEY}&language=en-US`);
+  
+  const res = await fetch(`https://api.themoviedb.org/3${endpoint}?api_key=${API_KEY}&language=en-US`, {next: {revalidate: 1000}});
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
